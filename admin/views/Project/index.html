@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-4">
+		<a class="btn btn-primary" href="/admin/slider/new">Ajouter un slider</a>
+	</div>
+</div>
+
+<div class="row">
+	<?php if(current($sliders)): ?>
+		<?php foreach($sliders as $slider): ?>
+			<div class="col-md-4">
+				<div class="slider-wrap">
+					<p>Slider : <?= $slider->name ?></p>
+					<img src="<?= IMG . 'gallery/' . $slider->id . '/' . $slider->thumb ?>" alt=""/>
+				</div>
+			</div>
+		<?php endforeach ?>
+	<?php else: ?>
+		<div class="col-md-4">
+			<p>Aucun slider crée pour le moment</p>
+		</div>
+	<?php endif ?>
+</div>

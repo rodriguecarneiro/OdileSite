@@ -1,0 +1,18 @@
+<!-- Static navbar -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Admin</a>
+        </div>
+        <?php if(isset($_SESSION['user'])): ?>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Front</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/admin/auth/logout">Logout</a></li>
+                </ul>
+            </div>
+        <?php endif ?>
+    </div>
+</nav>

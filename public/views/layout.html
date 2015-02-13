@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Site</title>
+		<meta charset="utf-8">
+
+		<!-- links include -->
+		<?php include 'link.html' ?>
+
+		<!-- js include-->
+  		<?php include 'js.html' ?>
+	</head>
+	<body id="pleinePage">
+		<header>
+			<div class="navbar">
+				<div class="navbar-inner">
+					<!-- menu -->
+					<?php include 'nav.html' ?>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			<?php include VIEWS . $this->view ?>
+		</div>
+	</body>
+</html>
