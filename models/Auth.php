@@ -1,5 +1,9 @@
 <?php
 
+namespace Models;
+
+use PDO;
+
 Class Auth extends \Core\Crud{
    	
    	/**

@@ -1,0 +1,91 @@
+<div class="slider-edit">
+    <h1>Slider : <?= $slider->name ?></h1>
+    <button type="button" class="btn btn-danger pull-right delete-slider">Supprimer</button>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form id="add-images-form" action="/admin/slider/update" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Nom du slider</label>
+                    <input type="name" class="form-control" id="name" name="name" value="<?= $slider->name ?>">
+                </div>
+                <div class="form-group">
+                    <label for="gallery">Ajouter des photos</label>
+                    <input class="add-images" type="file" id="gallery" name="gallery[]" multiple>
+                    <input type="hidden" name="id" value="<?= $slider->id ?>">
+                </div>
+                <?php include ADMIN_PARTIALS . 'returnBtn.html' ?>
+                <button type="submit" class="btn btn-success pull-right">Mettre à jour</button>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <hr/>
+    <div class="row">
+        <?php if($slider->images): ?>
+            <?php foreach($slider->images as $key => $image): ?>
+                <div class="col-md-4">
+                    <div class="image-wrap">
+                        <img class="slider-item cursor" data-image="image-<?=$key?>" src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
+                    </div>
+                    <div class="actions-block">
+                        <div class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></div>
+                    </div>
+                </div>
+                <?php include ADMIN_PARTIALS . 'imageEditForm.html' ?>
+            <?php endforeach ?>
+        <?php else: ?>
+            <div class="col-md-4">
+                <p>Il n'y a aucune photo dans le slider pour le moment</p>
+            </div>
+        <?php endif ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.slider-item').click(function () {
+        var imageId = $(this).data('image');
+        var $form = $('#' + imageId);
+        var $fileInput = $('#' + imageId + ' input[type="file"]');
+
+        $fileInput.click();
+        $fileInput.on('change', function () {
+            $form.submit();
+        })
+    })
+
+    $('.delete-image').click(function(){
+
+        var imageId = $(this).data('image-id');
+
+        if(confirm('Voulez-vous vraiment effacer cette photo ?')){
+            $.ajax({
+                type: 'POST',
+                url: '/admin/slider/deleteImage',
+                data: {
+                    sliderId: '<?= $slider->id ?>',
+                    imageId: imageId
+                },
+                success: function(){
+                    location.reload();
+                }
+            })
+        }
+    })
+
+    $('.delete-slider').click(function () {
+
+        if (confirm('Voulez-vous vraiment supprimer le slider ?')) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/slider/deleteSlider',
+                data: {
+                    sliderId: '<?= $slider->id ?>'
+                },
+                success: function () {
+                    location.href = '/admin';
+                }
+            })
+        }
+    })
+</script>

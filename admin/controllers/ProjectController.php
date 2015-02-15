@@ -1,14 +1,16 @@
 <?php
 
+use \Models\Slider;
+
 class ProjectController extends \Core\Controller
 {
 	public function indexAction()
 	{
 		$this->isLoggedIn();
-		
-		$sliders = $this->getModel('slider')->select();
 
-		if(current($sliders)){
+		$sliders = (new Slider)->select();
+
+		if($sliders){
 			foreach($sliders as $slider){
 				$slider->thumb = $this->getModel('slider')->get_thumb_picture($slider->id);
 			}

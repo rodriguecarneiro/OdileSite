@@ -210,11 +210,11 @@ class Controller
 	 * @return object
 	 */
 	public function getModel($model) {
-		require_once MODELS.ucfirst($model).'.php';
-		return new $model();
+		$class = '\Models\\' .ucfirst($model);
+		return new $class;
 	}
 
-	public function save_navigation() {
+	public function setNavigation() {
 
 		$lenght = 5;
 		$url = explode('/', $_SERVER["REQUEST_URI"]);
@@ -223,11 +223,23 @@ class Controller
 			if(!isset($_SESSION['nav'])){
 				$_SESSION['nav'][] = $_SERVER['REQUEST_URI'];
 			}else{
-				$array = array_reverse($_SESSION['nav']);
-				$array[] = $_SERVER['REQUEST_URI'];
-				$array = array_slice($array, -$lenght, $lenght);
-				$_SESSION['nav'] = array_reverse($array);
+				if($_SESSION['nav'][0] !== $_SERVER['REQUEST_URI']){
+
+					$array = array_reverse($_SESSION['nav']);
+					$array[] = $_SERVER['REQUEST_URI'];
+					$array = array_slice($array, -$lenght, $lenght);
+					$_SESSION['nav'] = array_reverse($array);
+				}
 			}
+		}
+	}
+
+	public function getNavigation($offset = 'last')
+	{
+		if($offset === 'last'){
+			return $_SESSION['nav'][1];
+		}else{
+			return $_SESSION['nav'][$offset];
 		}
 	}
 

@@ -1,7 +1,16 @@
 @import "variables";
 @import "bootstrap";
 @import "compass/css3";
+@import "admin-slider";
 
 .slider-wrap {
   margin: 10px 0;
+}
+
+.return-btn {
+  margin: 10px 0;
+}
+
+.cursor {
+  cursor: pointer;
 }

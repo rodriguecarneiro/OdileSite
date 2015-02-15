@@ -1,22 +1,32 @@
 <div class="row">
 	<div class="col-md-4">
-		<a class="btn btn-primary" href="/admin/slider/new">Ajouter un slider</a>
+		<a class="btn btn-primary" href="/admin/slider/new">
+			<span class="fa fa-plus" aria-hidden="true"></span> Ajouter un slider
+		</a>
 	</div>
 </div>
-
+<hr/>
 <div class="row">
-	<?php if(current($sliders)): ?>
-		<?php foreach($sliders as $slider): ?>
-			<div class="col-md-4">
-				<div class="slider-wrap">
+	<div class="slider-wrap">
+		<?php if($sliders): ?>
+			<?php foreach($sliders as $slider): ?>
+				<div class="col-md-4">
 					<p>Slider : <?= $slider->name ?></p>
-					<img src="<?= IMG . 'gallery/' . $slider->id . '/' . $slider->thumb ?>" alt=""/>
+					<?php if($slider->thumb !== null): ?>
+						<a href="/admin/slider/edit/<?= $slider->id ?>">
+							<img src="<?= IMG . 'gallery/' . $slider->id . '/' . $slider->thumb ?>" alt=""/>
+						</a>
+					<?php else: ?>
+						<a href="/admin/slider/edit/<?= $slider->id ?>">
+							<i class="fa fa-image fa-5x"></i>
+						</a>
+					<?php endif ?>
 				</div>
+			<?php endforeach ?>
+		<?php else: ?>
+			<div class="col-md-4">
+				<p>Aucun slider crée pour le moment</p>
 			</div>
-		<?php endforeach ?>
-	<?php else: ?>
-		<div class="col-md-4">
-			<p>Aucun slider crée pour le moment</p>
-		</div>
-	<?php endif ?>
+		<?php endif ?>
+	</div>
 </div>

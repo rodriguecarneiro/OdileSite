@@ -2,7 +2,7 @@
 
 //DB
 define('HOST',  'localhost');
-define('DB',    'base');
+define('DB',    'odile');
 define('USER',  'root');
 define('PASS',  '');
 
@@ -11,7 +11,7 @@ define('DS',            DIRECTORY_SEPARATOR);
 define('ROOT',          __DIR__.DS);
 define('CONF',          ROOT.'config'.DS);
 define('CTRL',          ROOT.'controllers'.DS);
-define('LIB',           ROOT.'lib'.DS);
+define('LIB',           ROOT.'libs'.DS);
 define('VIEWS',         ROOT.'public/views'.DS);
 define('MODELS',        ROOT.'models'.DS);
 define('COMMON',        ROOT.'public/views'.DS.'common'.DS);

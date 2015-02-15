@@ -17,8 +17,10 @@ class Crud{
 			echo $e->getMessage();
 		}
 
-		$this->class = strtolower(get_class($this));
-		$this->xxx_id = $this->class.'_id';		
+		$this->class = strtolower(str_replace('Models\\', '', get_class($this)));
+
+		//foreign key
+		$this->xxx_id = $this->class.'_id';
 
 	}
 
@@ -32,14 +34,14 @@ class Crud{
 		$query = $this->oConnect->prepare("
 			SELECT  *
 			FROM    " . $this->class . "
-			WHERE   " . $this->xxx_id . " = " . intval($id)
+			WHERE   id = " . intval($id)
 		);
 
 		$fetch = $query->execute();
 		$result = $query->fetch(PDO::FETCH_OBJ);
 
 		//set object identifier
-		$result->objectKey = $this->class.'/'.$result->{$this->xxx_id};
+		$result->objectKey = $this->class.'/'.$result->id;
 
 		return $result;
 	}
@@ -47,7 +49,7 @@ class Crud{
     public function select($params = array()){
 
         $columns = (isset($params['columns']))?$params['columns']:'*';
-        $table   = (isset($params['table']))?$params['table']:strtolower(get_class($this));
+        $table   = (isset($params['table']))?$params['table']:$this->class;
         $orderBy = (isset($params['orderBy']))?"ORDER BY " . $params['orderBy']:'';
 
         //set fetch mode
@@ -73,29 +75,36 @@ class Crud{
         }
 
         // prepare request
-        $query = $this->oConnect->prepare("SELECT {$columns} FROM {$table} {$where} {$orderBy}");
+        $stmt = $this->oConnect->prepare("SELECT {$columns} FROM {$table} {$where} {$orderBy}");
 
         if (isset($params['where'])){
 	        foreach ($params['where'] as $col => &$val){
-	            $query->bindParam(":{$col}", $val);
+				$stmt->bindParam(":{$col}", $val);
 	        }
         }
 
-        $result = $query->execute();
 
-       	if ($query->rowcount() > 1) {
-       		$results = array();
-			while($fetch = $query->fetch($fetchMode)){
+        $result = $stmt->execute();
+
+       	if ($stmt->rowcount() == 1) {
+
+			$fetch = $stmt->fetch($fetchMode);
+			$result = [$fetch];
+
+			return $result;
+
+		}elseif($stmt->rowcount() > 1){
+
+			$results = [];
+			while($fetch = $stmt->fetch($fetchMode)){
 				$results[] = $fetch;
 			};
+			return $results;
 
-        	return $results;
        	}else{
-			$fetch = $query->fetch($fetchMode);
-			$result = array($fetch);
 
-        	return $result;
-       	}
+			return $stmt->fetch($fetchMode);
+		}
     }
 
 	public function create(){
@@ -127,17 +136,17 @@ class Crud{
 
 	public function update(){
 
-		$oid = $_POST[$this->xxx_id];
+		$oid = $_POST['id'];
 
 		//format values for update query
 		$update_values="";
 		$where="";
 		foreach ($_POST as $sFieldName => $sFieldValue) {
 
-			if($sFieldName !== $this->xxx_id){
+			if($sFieldName !== 'id'){
 				$update_values .= $sFieldName.' = "'.filter_var($sFieldValue, FILTER_SANITIZE_MAGIC_QUOTES).'", ';
 			}else{
-				$where = 'WHERE '.$this->xxx_id.' = :id';
+				$where = 'WHERE id = :id';
 			}
 
 			//save POST values in class attributes
@@ -147,7 +156,7 @@ class Crud{
 		$sql = 'UPDATE '.$this->class.' SET '.substr($update_values, 0, -2).' '.$where;
 		$query = $this->oConnect->prepare($sql);
 
-		$query->execute(array(':id' => $_POST[$this->xxx_id]));
+		$query->execute(array(':id' => $oid));
 
 		return $this;
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core; 
+namespace Core;
 
 class Application
 {
@@ -18,10 +18,10 @@ class Application
 
 		$this->setAdminViewsDir("../" . $this->adminDir . "/views/")
 		->setAdminControllersDir("../" . $this->adminDir . "/controllers/")
-		->setViewsDir("views/")
+		->setViewsDir("../public/views/")
 		->setControllersDir("../controllers/");
 
-		spl_autoload_register(array($this, "autoload"));
+		//spl_autoload_register(array($this, "autoload"));
 
 		$this->router = new Router($this->adminDir);
 	}
@@ -137,7 +137,7 @@ class Application
 		$controller = new $controller($requestedView);
 
 		//set url_from
-		if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){ $controller->save_navigation(); }
+		if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){ $controller->setNavigation(); }
 		
 		//get method
 		$method = $this->router->getMethod();
@@ -146,6 +146,7 @@ class Application
 		if (!method_exists($controller, $method)){ $this->error404(); }
 
 		//run method and set params
+
 		$controller->setParams($this->router->getParams())->$method();
 	}
 	/**

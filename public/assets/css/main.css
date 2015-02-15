@@ -8033,7 +8033,17 @@ button.close {
     display: none !important;
   }
 }
-/* line 5, ../../../src/stylesheets/main.scss */
+/* line 6, ../../../src/stylesheets/main.scss */
 .slider-wrap {
   margin: 10px 0;
+}
+
+/* line 10, ../../../src/stylesheets/main.scss */
+.return-btn {
+  margin: 10px 0;
+}
+
+/* line 14, ../../../src/stylesheets/main.scss */
+.cursor {
+  cursor: pointer;
 }

@@ -5,10 +5,8 @@
 
 	require_once '../bootstrap.php';
 
-	//include App
-	set_include_path(get_include_path() . PATH_SEPARATOR . "../");
-	require_once "../core/Application.php";
+	require __DIR__ . '/../vendor/autoload.php';
 
 	//launch
-	$app = new \Core\Application();
+	$app = new Core\Application();
 	$app->run();
