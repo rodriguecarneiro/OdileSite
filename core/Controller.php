@@ -31,6 +31,9 @@ class Controller
 
     public function __construct($tplDir) {
 
+		//admin security
+		$this->isAllowed();
+
 		//set template dir
 		$this->tplDir = $tplDir;
 
@@ -44,21 +47,16 @@ class Controller
 
 	    	$this->app = $app;
 	    	$this->me = $this->getModel('user')->getCurrent($_SESSION['user']['user_id']);
-			$this->isAdmin = $_SESSION['user']['admin']?true:false;
+			$this->isAdmin = $_SESSION['user']['admin'] ? true : false;
 
 	    	//notifications
-	    	$this->userNotifications = $app->getUserNotifications();
-	    	$this->UnreadNotifications = $app->getUnreadNotifications();
+	    	//$this->userNotifications = $app->getUserNotifications();
+	    	//$this->UnreadNotifications = $app->getUnreadNotifications();
 
 	    	//messages
 	    	// $this->userMessages = $app->getUserMessages();
 	    	// $this->UnreadMessages = $app->getUnreadMessages();
     	}
-
-		//page access control
-		//$tmp = explode('/', $_SERVER['REQUEST_URI']);
-		//$uri = array_splice($tmp, 1);
-		//if ($uri[0] !== "auth" && !isset($_SESSION['user'])) { $this->redirect('/auth'); };
 
 		// Model auto-instanciation in controller
 		$className = str_replace("Controller", "", get_class($this));
@@ -214,7 +212,7 @@ class Controller
 		return new $class;
 	}
 
-	public function setNavigation() {
+	public function setUris() {
 
 		$lenght = 5;
 		$url = explode('/', $_SERVER["REQUEST_URI"]);
@@ -234,7 +232,7 @@ class Controller
 		}
 	}
 
-	public function getNavigation($offset = 'last')
+	public function getRequestedUri($offset = 'last')
 	{
 		if($offset === 'last'){
 			return $_SESSION['nav'][1];
@@ -243,13 +241,17 @@ class Controller
 		}
 	}
 
-	public function isLoggedIn()
+	public function isAllowed()
 	{
-		$request = explode('/', $_SERVER['REQUEST_URI']);
-		$uri = array_splice($request, 1);
-		if ($uri[0] == "admin" && !isset($_SESSION['user'])) {
-			$this->redirect('/admin/auth');
-		};
+		$router = new Router();
+		if ($router->getRequest() !== '/admin/auth' && $router->getRequest() !== '/admin/auth/login') {
+
+			$request = explode('/', $_SERVER['REQUEST_URI']);
+			$uri = array_splice($request, 1);
+			if ($uri[0] == "admin" && !isset($_SESSION['user'])) {
+				$this->redirect('/admin/auth');
+			};
+		}
 	}
 }
 

@@ -6,8 +6,6 @@ class ProjectController extends \Core\Controller
 {
 	public function indexAction()
 	{
-		$this->isLoggedIn();
-
 		$sliders = (new Slider)->select();
 
 		if($sliders){

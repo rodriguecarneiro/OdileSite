@@ -8,7 +8,6 @@ class SliderController extends \Core\Controller
 {
 	public function newAction()
 	{
-		$this->isLoggedIn();
 		$this->render('new');
 	}
 

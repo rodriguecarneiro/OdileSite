@@ -12,7 +12,7 @@ class Router
 	/**
 	 * Constructor
 	 */
-	public function __construct($admin_folder) {
+	public function __construct($admin_folder = 'admin') {
 
 		$this->request = strtok($_SERVER['REQUEST_URI'], "?");
 
@@ -65,6 +65,10 @@ class Router
 	 */
 	public function getMethod() {
 		return $this->method;
+	}
+
+	public function getRequest() {
+		return $this->request;
 	}
 }
 

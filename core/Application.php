@@ -21,18 +21,8 @@ class Application
 		->setViewsDir("../public/views/")
 		->setControllersDir("../controllers/");
 
-		//spl_autoload_register(array($this, "autoload"));
-
 		$this->router = new Router($this->adminDir);
 	}
-	/**
-	 * Autoload for SPL. Think about putting your libraries and controller folder
-	 * in include paths.
-	 */
-	public function autoload($className) {
-        $pathToClass = str_replace("\\","/", $className);
-        require($pathToClass . ".php");
-    }
 	/**
 	 * Set the admin directory
 	 * @param string $adminDir Directory where the admin is located
@@ -137,7 +127,7 @@ class Application
 		$controller = new $controller($requestedView);
 
 		//set url_from
-		if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){ $controller->setNavigation(); }
+		if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){ $controller->setUris(); }
 		
 		//get method
 		$method = $this->router->getMethod();
@@ -154,7 +144,7 @@ class Application
 	 * @return void
 	 */
 	public function error404() {
-		echo '404 page not found !!!';
+		echo 'Oups ! Page not found...';
 		exit();
 	}
 }
