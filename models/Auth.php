@@ -16,11 +16,11 @@ Class Auth extends \Core\Crud{
 
 		// select db_password from the email
 		// return db_password | false
-		$user = current($this->select(array(
+		$user = current($this->select([
 			'table' 	=> 'user',
 			'where'		=> array('login' => $login),
 			'fetchMode' => PDO::FETCH_ASSOC
-		)));
+		]));
 
 		//check email and password pair  
 		if (!empty($user)) {

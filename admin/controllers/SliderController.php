@@ -65,6 +65,12 @@ class SliderController extends \Core\Controller
 		(new Slider)->delete($sliderId);
 	}
 
+	public function setImageToFrontAction()
+	{
+		$imgId = $this->getPOST('imageId');
+		(new Image())->setFrontStatus($imgId);
+	}
+
 	public function deleteImageAction()
 	{
 		$sliderId = $this->getPOST('sliderId');

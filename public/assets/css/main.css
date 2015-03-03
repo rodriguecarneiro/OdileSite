@@ -8033,17 +8033,34 @@ button.close {
     display: none !important;
   }
 }
-/* line 6, ../../../src/stylesheets/main.scss */
+/* line 7, ../../../src/stylesheets/main.scss */
 .slider-wrap {
   margin: 10px 0;
 }
 
-/* line 10, ../../../src/stylesheets/main.scss */
+/* line 11, ../../../src/stylesheets/main.scss */
 .return-btn {
   margin: 10px 0;
 }
 
-/* line 14, ../../../src/stylesheets/main.scss */
+/* line 15, ../../../src/stylesheets/main.scss */
 .cursor {
   cursor: pointer;
+}
+
+/* line 20, ../../../src/stylesheets/main.scss */
+.image-wrap {
+  position: relative;
+  width: 290px;
+}
+/* line 24, ../../../src/stylesheets/main.scss */
+.image-wrap .fa {
+  cursor: pointer;
+}
+/* line 27, ../../../src/stylesheets/main.scss */
+.image-wrap .fa.fa-star-o, .image-wrap .fa.fa-star {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
 }

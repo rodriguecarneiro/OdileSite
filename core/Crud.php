@@ -134,29 +134,43 @@ class Crud{
 
 	}
 
-	public function update(){
+	public function update(array $data = []){
 
-		$oid = $_POST['id'];
+		$oid = !empty($data) ? $data['id'] : $_POST['id'];
 
 		//format values for update query
-		$update_values="";
-		$where="";
-		foreach ($_POST as $sFieldName => $sFieldValue) {
+		$update_values = "";
 
-			if($sFieldName !== 'id'){
-				$update_values .= $sFieldName.' = "'.filter_var($sFieldValue, FILTER_SANITIZE_MAGIC_QUOTES).'", ';
-			}else{
-				$where = 'WHERE id = :id';
+		//custom fields
+		if(!empty($data)){
+
+			foreach ($data as $fieldName => $fieldValue) {
+				if ($fieldName !== 'id') {
+					$update_values .= $fieldName . ' = "' . filter_var($fieldValue, FILTER_SANITIZE_MAGIC_QUOTES) . '", ';
+				}
+				//save POST values in class attributes
+				$this->$fieldName = $fieldValue;
 			}
 
-			//save POST values in class attributes
-			$this->$sFieldName = $sFieldValue;
+		}else{
+
+			foreach ($_POST as $fieldName => $fieldValue) {
+				if($fieldName !== 'id'){
+					//fields from form
+					$update_values .= $fieldName . ' = "' . filter_var($fieldValue, FILTER_SANITIZE_MAGIC_QUOTES) . '", ';
+
+				}
+				//save POST values in class attributes
+				$this->$fieldName = $fieldValue;
+			}
 		}
 
-		$sql = 'UPDATE '.$this->class.' SET '.substr($update_values, 0, -2).' '.$where;
-		$query = $this->oConnect->prepare($sql);
+		$where = 'WHERE id = :id';
 
-		$query->execute(array(':id' => $oid));
+		$sql = 'UPDATE '.$this->class.' SET '.substr($update_values, 0, -2).' '.$where;
+
+		$query = $this->oConnect->prepare($sql);
+		$query->execute([':id' => $oid]);
 
 		return $this;
 	}

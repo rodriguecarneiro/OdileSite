@@ -26,10 +26,15 @@
             <?php foreach($slider->images as $key => $image): ?>
                 <div class="col-md-4">
                     <div class="image-wrap">
+                        <?php if($image->front): ?>
+                            <i class="fa fa-star fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                        <?php else: ?>
+                            <i class="fa fa-star-o fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                        <?php endif ?>
                         <img class="slider-item cursor" data-image="image-<?=$key?>" src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
                     </div>
                     <div class="actions-block">
-                        <div class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></div>
+                        <i class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></i>
                     </div>
                 </div>
                 <?php include ADMIN_PARTIALS . 'imageEditForm.html' ?>
@@ -52,6 +57,20 @@
         $fileInput.click();
         $fileInput.on('change', function () {
             $form.submit();
+        })
+    })
+
+    $('.front-image').click(function(){
+        var imageId = $(this).data('image-id');
+        $.ajax({
+            type: 'POST',
+            url: '/admin/slider/setImageToFront',
+            data: {
+                imageId: imageId
+            },
+            success: function () {
+                location.reload();
+            }
         })
     })
 

@@ -6,13 +6,13 @@ use Models\Image;
 
 Class Image extends \Core\Crud
 {
-    public static function deleteImg($slider_id, $img_id)
+    public static function deleteImg($sliderId, $imgId)
     {
         $image = new Image();
-        $pic = current($image->select(['where' => ['id' => $img_id]]));
+        $pic = $image->getCurrent($imgId);
 
         //delete pics from site folder
-        $dirPath = SITE_IMG . 'gallery' . DS . $slider_id . DS;
+        $dirPath = SITE_IMG . 'gallery' . DS . $sliderId . DS;
 
         $thumb = $dirPath . $pic->thumb . '.jpg';
         $big = $dirPath . $pic->big . '.jpg';
@@ -21,8 +21,22 @@ Class Image extends \Core\Crud
         unlink($big);
 
         // delete image from bdd
-        $sql = 'DELETE FROM image WHERE slider_id = ' . $slider_id . ' AND id = ' . $img_id;
+        $sql = 'DELETE FROM image WHERE slider_id = ' . $sliderId . ' AND id = ' . $imgId;
 
         $image->oConnect->exec($sql);
+    }
+
+    public function setFrontStatus($imgId)
+    {
+        $image = new Image();
+        $pic = $image->getCurrent($imgId);
+
+        $front = $pic->front ? 0 : 1;
+
+        $image->update([
+            'id' => $imgId,
+            'front' => $front
+        ]);
+        
     }
 }
