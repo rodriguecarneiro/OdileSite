@@ -8048,17 +8048,18 @@ button.close {
   cursor: pointer;
 }
 
-/* line 20, ../../../src/stylesheets/main.scss */
-.image-wrap {
+/* line 22, ../../../src/stylesheets/main.scss */
+#slider-images .image-wrap {
   position: relative;
   width: 290px;
-}
-/* line 24, ../../../src/stylesheets/main.scss */
-.image-wrap .fa {
-  cursor: pointer;
+  list-style-type: none;
 }
 /* line 27, ../../../src/stylesheets/main.scss */
-.image-wrap .fa.fa-star-o, .image-wrap .fa.fa-star {
+#slider-images .image-wrap .fa {
+  cursor: pointer;
+}
+/* line 30, ../../../src/stylesheets/main.scss */
+#slider-images .image-wrap .fa.fa-star-o, #slider-images .image-wrap .fa.fa-star {
   position: absolute;
   top: 5px;
   right: 5px;

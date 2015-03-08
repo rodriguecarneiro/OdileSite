@@ -33,7 +33,8 @@ class SliderController extends \Core\Controller
 	{
 		$slider = $this->model->getCurrent($this->getParam('id'));
 		$slider->images = $this->getModel('image')->select([
-			'where' => ['slider_id' => $slider->id]
+			'where' => ['slider_id' => $slider->id],
+			'orderBy' => 'order'
 		]);
 
 		$this->render('edit', [
@@ -76,5 +77,14 @@ class SliderController extends \Core\Controller
 		$sliderId = $this->getPOST('sliderId');
 		$imgId = $this->getPOST('imageId');
 		(new Image)->deleteImg($sliderId, $imgId);
+	}
+
+	public function setImagesOrderAction()
+	{
+		foreach ($_POST['order'] as $key => $pic) {
+			$imageId = substr($pic, 4);
+			$sql = "UPDATE image i SET i.order = $key WHERE i.id = $imageId";
+			$this->model->oConnect->exec($sql);
+		}
 	}
 }

@@ -48,9 +48,9 @@ class Crud{
 
     public function select($params = array()){
 
-        $columns = (isset($params['columns']))?$params['columns']:'*';
-        $table   = (isset($params['table']))?$params['table']:$this->class;
-        $orderBy = (isset($params['orderBy']))?"ORDER BY " . $params['orderBy']:'';
+        $columns = (isset($params['columns'])) ? $params['columns'] : '*';
+        $table   = (isset($params['table'])) ? $params['table'] : $this->class;
+        $orderBy = (isset($params['orderBy'])) ? "ORDER BY `" . $params['orderBy'] . "`" : '';
 
         //set fetch mode
         $fetchMode = (isset($params['fetchMode'])) ? $params['fetchMode'] : PDO::FETCH_OBJ ;

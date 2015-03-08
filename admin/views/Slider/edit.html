@@ -23,22 +23,24 @@
     <hr/>
     <div class="row">
         <?php if($slider->images): ?>
-            <?php foreach($slider->images as $key => $image): ?>
-                <div class="col-md-4">
-                    <div class="image-wrap">
-                        <?php if($image->front): ?>
-                            <i class="fa fa-star fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
-                        <?php else: ?>
-                            <i class="fa fa-star-o fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
-                        <?php endif ?>
-                        <img class="slider-item cursor" data-image="image-<?=$key?>" src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
-                    </div>
-                    <div class="actions-block">
-                        <i class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></i>
-                    </div>
-                </div>
-                <?php include ADMIN_PARTIALS . 'imageEditForm.html' ?>
-            <?php endforeach ?>
+           <ul id="slider-images">
+               <?php foreach($slider->images as $key => $image): ?>
+                   <div class="col-md-4" id="pic-<?= $image->id ?>">
+                       <li class="image-wrap">
+                           <?php if($image->front): ?>
+                           <i class="fa fa-star fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                           <?php else: ?>
+                           <i class="fa fa-star-o fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                           <?php endif ?>
+                           <img class="slider-item" data-image="image-<?=$key?>"
+                                src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
+                           <div class="actions-block">
+                               <i class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></i>
+                           </div>
+                       </li>
+                   </div>
+               <?php endforeach ?>
+           </ul>
         <?php else: ?>
             <div class="col-md-4">
                 <p>Il n'y a aucune photo dans le slider pour le moment</p>
@@ -47,17 +49,24 @@
     </div>
 </div>
 
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script type="text/javascript">
 
-    $('.slider-item').click(function () {
-        var imageId = $(this).data('image');
-        var $form = $('#' + imageId);
-        var $fileInput = $('#' + imageId + ' input[type="file"]');
+    $(function(){
+        $("#slider-images").sortable({
+            update: function () {
+                var order = $('#slider-images').sortable('toArray');
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/slider/setImagesOrder",
 
-        $fileInput.click();
-        $fileInput.on('change', function () {
-            $form.submit();
-        })
+                    data: {
+                        order: order
+                    }
+                })
+            }
+        });
+        $("#slider-images").disableSelection();
     })
 
     $('.front-image').click(function(){
