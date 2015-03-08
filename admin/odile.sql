@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 08 Mars 2015 à 15:34
+-- Généré le: Dim 08 Mars 2015 à 22:56
 -- Version du serveur: 5.6.16
 -- Version de PHP: 5.5.18
 
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS `image` (
   `big` varchar(255) NOT NULL,
   `front` tinyint(1) NOT NULL DEFAULT '0',
   `slider_id` int(11) NOT NULL,
-  `order` int(11) NOT NULL,
+  `order` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `name` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
