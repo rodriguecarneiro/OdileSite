@@ -19,34 +19,29 @@
             </form>
         </div>
     </div>
-    <br/>
     <hr/>
-    <div class="row">
-        <?php if($slider->images): ?>
-           <ul id="slider-images">
-               <?php foreach($slider->images as $key => $image): ?>
-                   <div class="col-md-4" id="pic-<?= $image->id ?>">
-                       <li class="image-wrap">
-                           <?php if($image->front): ?>
-                           <i class="fa fa-star fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
-                           <?php else: ?>
-                           <i class="fa fa-star-o fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
-                           <?php endif ?>
-                           <img class="slider-item" data-image="image-<?=$key?>"
-                                src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
-                           <div class="actions-block">
-                               <i class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></i>
-                           </div>
-                       </li>
+    <?php if($slider->images): ?>
+       <ul id="slider-images" class="clearfix">
+           <?php foreach($slider->images as $key => $image): ?>
+               <li id="pic-<?= $image->id ?>" class="image-wrap">
+                   <?php if($image->front): ?>
+                   <i class="fa fa-star fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                   <?php else: ?>
+                   <i class="fa fa-star-o fa-2x front-image" data-image-id="<?= $image->id ?>"></i>
+                   <?php endif ?>
+                   <img class="slider-item" data-image="image-<?=$key?>"
+                        src="<?= IMG . 'gallery/' . $slider->id . '/' . $image->thumb ?>" alt=""/>
+                   <div class="actions-block">
+                       <i class="fa fa-close cursor delete-image" data-image-id="<?= $image->id ?>"></i>
                    </div>
-               <?php endforeach ?>
-           </ul>
-        <?php else: ?>
-            <div class="col-md-4">
-                <p>Il n'y a aucune photo dans le slider pour le moment</p>
-            </div>
-        <?php endif ?>
-    </div>
+               </li>
+           <?php endforeach ?>
+       </ul>
+    <?php else: ?>
+        <div class="col-md-4">
+            <p>Il n'y a aucune photo dans le slider pour le moment</p>
+        </div>
+    <?php endif ?>
 </div>
 
 <script type="text/javascript" src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>

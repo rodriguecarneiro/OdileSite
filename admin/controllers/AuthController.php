@@ -5,7 +5,7 @@ class AuthController extends \Core\Controller
 
 	public function indexAction() {
 
-		$this->render("index", array(), array(),"Auth/index");
+		$this->render("index");
 	}
 
 	public function loginAction() {
