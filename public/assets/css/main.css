@@ -8042,19 +8042,23 @@ html {
 html body {
   margin-bottom: 60px;
 }
-/* line 14, ../../../src/stylesheets/main.scss */
+/* line 15, ../../../src/stylesheets/main.scss */
+html body .bxslider li img {
+  text-align: center;
+}
+/* line 22, ../../../src/stylesheets/main.scss */
 html body .slider-wrap {
   margin: 10px 0;
 }
-/* line 18, ../../../src/stylesheets/main.scss */
+/* line 26, ../../../src/stylesheets/main.scss */
 html body .return-btn {
   margin: 10px 0;
 }
-/* line 22, ../../../src/stylesheets/main.scss */
+/* line 30, ../../../src/stylesheets/main.scss */
 html body .cursor {
   cursor: pointer;
 }
-/* line 29, ../../../src/stylesheets/main.scss */
+/* line 37, ../../../src/stylesheets/main.scss */
 html body #slider-images .image-wrap {
   position: relative;
   width: 290px;
@@ -8062,18 +8066,18 @@ html body #slider-images .image-wrap {
   float: left;
   margin-right: 15px;
 }
-/* line 36, ../../../src/stylesheets/main.scss */
+/* line 44, ../../../src/stylesheets/main.scss */
 html body #slider-images .image-wrap .fa {
   cursor: pointer;
 }
-/* line 39, ../../../src/stylesheets/main.scss */
+/* line 47, ../../../src/stylesheets/main.scss */
 html body #slider-images .image-wrap .fa.fa-star-o, html body #slider-images .image-wrap .fa.fa-star {
   position: absolute;
   top: 5px;
   right: 5px;
   color: white;
 }
-/* line 51, ../../../src/stylesheets/main.scss */
+/* line 59, ../../../src/stylesheets/main.scss */
 html body .footer {
   position: absolute;
   bottom: 0;
@@ -8081,7 +8085,7 @@ html body .footer {
   height: 60px;
   background-color: #f5f5f5;
 }
-/* line 58, ../../../src/stylesheets/main.scss */
+/* line 66, ../../../src/stylesheets/main.scss */
 html body .footer p {
   margin-top: 20px;
 }

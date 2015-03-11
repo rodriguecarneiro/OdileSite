@@ -20,7 +20,7 @@ class SliderController extends \Core\Controller
 			$upload->multiUpload(
 				$slider,
 				array(
-					array('size' => 'big', 'image_y' => 700, 'image_ratio_x' => true),
+					array('size' => 'big', 'image_y' => 800, 'image_ratio_y' => true),
 					array('size' => 'thumb', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 290, 'image_y' => 140)
 				)
 			);
@@ -51,7 +51,7 @@ class SliderController extends \Core\Controller
 			$upload->multiUpload(
 				$slider,
 				array(
-					array('size' => 'big', 'image_y' => 700, 'image_ratio_x' => true),
+					array('size' => 'big', 'image_x' => 800, 'image_ratio_y' => true),
 					array('size' => 'thumb', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 290, 'image_y' => 140)
 				)
 			);

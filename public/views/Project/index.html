@@ -1,0 +1,17 @@
+<?php if($slider): ?>
+    <ul class="bxslider">
+        <?php foreach($slider as $picture): ?>
+            <li>
+                <img class="img-responsive" src="<?= IMG . 'gallery/' . $picture->slider_id . '/' . $picture->big ?>" alt=""/>
+            </li>
+        <?php endforeach ?>
+    </ul>
+<?php endif ?>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('.bxslider').bxSlider({
+            mode: 'fade'
+        });
+    });
+</script>

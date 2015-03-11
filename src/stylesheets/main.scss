@@ -10,6 +10,14 @@ html {
   body {
     margin-bottom: 60px;
 
+    .bxslider {
+      li {
+        img {
+          text-align: center;
+        }
+      }
+    }
+
     //admin index
     .slider-wrap {
       margin: 10px 0;
