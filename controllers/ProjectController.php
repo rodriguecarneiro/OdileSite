@@ -7,7 +7,7 @@ class ProjectController extends \Core\Controller
 	public function indexAction()
 	{
 		$slider = (new Image)->select([
-			'where' => ['slider_id' => 2],
+			'where' => ['front' => 1],
 			'orderBy' => 'order'
 		]);
 

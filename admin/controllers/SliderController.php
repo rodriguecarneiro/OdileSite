@@ -20,7 +20,7 @@ class SliderController extends \Core\Controller
 			$upload->multiUpload(
 				$slider,
 				array(
-					array('size' => 'big', 'image_y' => 800, 'image_ratio_y' => true),
+					array('size' => 'big', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 800, 'image_y' => 533),
 					array('size' => 'thumb', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 290, 'image_y' => 140)
 				)
 			);
@@ -31,7 +31,13 @@ class SliderController extends \Core\Controller
 
 	public function editAction()
 	{
-		$slider = $this->model->getCurrent($this->getParam('id'));
+		try{
+			$slider = $this->model->getCurrent($this->getParam('id'));
+		}catch(Exception $e){
+			echo $e->getMessage() . '<br/><a href="/admin">Retour</a>';
+			return false;
+		}
+
 		$slider->images = $this->getModel('image')->select([
 			'where' => ['slider_id' => $slider->id],
 			'orderBy' => 'order'
@@ -51,7 +57,7 @@ class SliderController extends \Core\Controller
 			$upload->multiUpload(
 				$slider,
 				array(
-					array('size' => 'big', 'image_x' => 800, 'image_ratio_y' => true),
+					array('size' => 'big', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 800, 'image_y' => 533),
 					array('size' => 'thumb', 'image_resize' => true, 'image_ratio_crop' => true, 'image_x' => 290, 'image_y' => 140)
 				)
 			);

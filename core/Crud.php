@@ -40,7 +40,10 @@ class Crud{
 		$fetch = $query->execute();
 		$result = $query->fetch(PDO::FETCH_OBJ);
 
-		//set object identifier
+		if(!$result){
+			throw new \Exception('L\'objet ' . ucfirst($this->class) . ' id = ' . $id . ' n\'existe pas.');
+		}
+
 		$result->objectKey = $this->class.'/'.$result->id;
 
 		return $result;
