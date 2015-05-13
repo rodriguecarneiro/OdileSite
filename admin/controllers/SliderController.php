@@ -25,7 +25,7 @@ class SliderController extends \Core\Controller
 				)
 			);
 		}
-		
+
 		$this->redirect('/admin');
 	}
 

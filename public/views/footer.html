@@ -1,1 +1,76 @@
-<p class="pull-right">EssenceWeb &copy; <?= date('Y') ?></p>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<?= JS ?>bootstrap.min.js"></script>
+
+<!-- bxSlider Javascript file -->
+<script src="<?= JS ?>jquery.bxslider.min.js"></script>
+<script type="text/javascript">
+    $(window).load(function() {
+        $('.bxslider').bxSlider({
+        	// GENERAL
+			mode: 'fade',
+			slideSelector: '',
+			infiniteLoop: true,
+			hideControlOnEnd: false,
+			speed: 1700,
+			easing: null,
+			slideMargin: 0,
+			startSlide: 0,
+			randomStart: false,
+			captions: false,
+			ticker: false,
+			tickerHover: false,
+			adaptiveHeight: true,
+			adaptiveHeightSpeed: 500,
+			video: false,
+			useCSS: true,
+			preloadImages: 'visible',
+			responsive: true,
+			slideZIndex: 50,
+			wrapperClass: 'bx-wrapper',
+
+			// TOUCH
+			touchEnabled: true,
+			swipeThreshold: 50,
+			oneToOneTouch: true,
+			preventDefaultSwipeX: true,
+			preventDefaultSwipeY: false,
+
+			// PAGER
+			pager: false,
+			pagerType: 'full',
+			pagerShortSeparator: ' / ',
+			pagerSelector: null,
+			buildPager: null,
+			pagerCustom: null,
+
+			// CONTROLS
+			controls: false,
+			nextText: 'Next',
+			prevText: 'Prev',
+			nextSelector: null,
+			prevSelector: null,
+			autoControls: false,
+			startText: 'Start',
+			stopText: 'Stop',
+			autoControlsCombine: false,
+			autoControlsSelector: null,
+
+			// AUTO
+			auto: true,
+			pause: 1200,
+			autoStart: true,
+			autoDirection: 'next',
+			autoHover: true,
+			autoDelay: 0,
+			autoSlideForOnePage: false,
+
+			// CAROUSEL
+			minSlides: 1,
+			maxSlides: 1,
+			moveSlides: 0,
+			slideWidth: 0
+        });
+    });
+</script>

@@ -1,0 +1,124 @@
+body{
+	background-color: #f1f2f2;
+}
+
+#container_logo{
+	text-align: center;
+	margin: auto;
+}
+
+#logo{
+	width: 100%;
+	max-width: 530px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+ul{
+	-webkit-padding-start: 0px !important;
+	margin-bottom: 5px;
+}
+
+#menu{
+	padding-left: 30px;
+}
+
+#leftMenu .accordion-group{
+    margin-bottom: 0px;
+    border:0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}    
+
+#leftMenu .accordion-heading a{  
+    color: #5b5a5a; /* text color */
+    text-decoration:none;
+    font-family: "Helvetica";
+    font-weight: 100;
+    font-size: 13px;
+}
+
+#leftMenu .accordion-heading  a:hover{  
+    color: #6c2645;
+    font-family: "Helvetica";
+    font-weight: 100;
+    font-size: 13px;
+}
+
+#leftMenu .accordion-heading .active{
+    width: 182px;
+    height: 34px;
+    border: 1px solid #5b5a5a; /* inner stroke */
+    background-color: #353535; /* layer fill content */
+    background-image: -moz-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+}
+
+.bxslider{
+	padding-left: 0px;
+}
+
+.accordion-inner{
+	font-family: "Helvetica";
+	font-weight: 100;
+	color: #5b5a5a;
+}
+.accordion-inner:hover{
+	font-family: "Helvetica";
+	font-weight: 100;
+	color: #6c2645;
+}
+
+.accordion-inner ul{
+	list-style: none;
+	font-size: 12px;
+}
+
+.accordion-inner ul li{
+	padding-left: 16px;
+}
+
+.accordion-inner ul li a{
+	color: #3c3c3c;
+}
+
+.accordion-inner ul li a:hover{
+	color: #6c2645;
+}
+
+@media (min-width: 1px) and (max-width: 991px) {
+	#logo{
+		margin-left: 0px;
+		margin-bottom: 0px;
+		max-width: 340px;
+	}
+	#container_logo{
+		margin-bottom: 15px;
+	}
+	#div_logo{
+		text-align: center;
+	}
+	#menu{
+		padding-left: 0px;
+		text-align: center;
+		margin-bottom: 27px;
+	}
+	.accordion-inner ul li{
+		padding-left: 0px;
+	}
+}
+
+.contact_info{
+	text-align: center;
+}
+
+.contact_info p{
+	margin-top: 58px;
+	color: #3c3c3c;
+	font-size: 12px;
+	font-weight: 100;
+	font-family: "Helvetica";
+}

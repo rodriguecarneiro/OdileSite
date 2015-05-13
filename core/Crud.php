@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use Cocur\Slugify\Slugify;
 use PDO;
 
 class Crud{
@@ -79,34 +80,31 @@ class Crud{
 
         // prepare request
         $stmt = $this->oConnect->prepare("SELECT {$columns} FROM {$table} {$where} {$orderBy}");
+		$stmt->setFetchMode($fetchMode);
 
-        if (isset($params['where'])){
+		if (isset($params['where'])){
 	        foreach ($params['where'] as $col => &$val){
 				$stmt->bindParam(":{$col}", $val);
 	        }
         }
 
-
         $result = $stmt->execute();
 
-       	if ($stmt->rowcount() == 1) {
+		if ($stmt->rowcount() == 1) {
 
-			$fetch = $stmt->fetch($fetchMode);
-			$result = [$fetch];
-
-			return $result;
+			return [$stmt->fetch()];
 
 		}elseif($stmt->rowcount() > 1){
 
 			$results = [];
-			while($fetch = $stmt->fetch($fetchMode)){
-				$results[] = $fetch;
+			foreach($stmt as $key => $data){
+				array_push($results, $data);
 			};
+
 			return $results;
 
        	}else{
-
-			return $stmt->fetch($fetchMode);
+			return $stmt->fetch();
 		}
     }
 
@@ -131,12 +129,23 @@ class Crud{
 				VALUE ('.$sValues.')';
 
 		$query = $this->oConnect->exec($sql);
-		$this->lastInsert = $this->oConnect->lastInsertId();
+		$lastInsert = $this->oConnect->lastInsertId();
 
+		//slug
+		$slug = $this->getSlug();
+		$this->update([
+			'slug' => $slug,
+			'id' => $lastInsert
+		]);
+		
 		return $this;
 
 	}
 
+	/**
+	 * @param array $data
+	 * @return $this
+     */
 	public function update(array $data = []){
 
 		$oid = !empty($data) ? $data['id'] : $_POST['id'];
@@ -170,7 +179,16 @@ class Crud{
 
 		$where = 'WHERE id = :id';
 
-		$sql = 'UPDATE '.$this->class.' SET '.substr($update_values, 0, -2).' '.$where;
+		//slug
+		$slug = $this->getSlug();
+		if ($slug !== null) {
+			$update_values .= 'slug = "' . $slug . '"';
+			$this->slug = $slug;
+		}else{
+			$update_values = substr($update_values, 0, -2);
+		}
+
+		$sql = 'UPDATE ' . $this->class . ' SET ' . $update_values  . ' ' . $where;
 
 		$query = $this->oConnect->prepare($sql);
 		$query->execute([':id' => $oid]);
@@ -210,5 +228,23 @@ class Crud{
         $result = $query->execute();
 
 		return 'deleted';
+	}
+
+	public function getSlug(){
+
+		//slug gestion
+		if (isset($_POST['name']) or isset($_POST['title'])) {
+
+			if (isset($_POST['name'])) {
+				$designation = filter_var($_POST['name'], FILTER_SANITIZE_MAGIC_QUOTES);
+			} elseif (isset($_POST['title'])) {
+				$designation = filter_var($_POST['title'], FILTER_SANITIZE_MAGIC_QUOTES);
+			}
+
+			$slugify = new Slugify();
+			return $slugify->slugify($designation);
+		}else{
+			return;
+		}
 	}
 }

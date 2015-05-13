@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-	<title>Front</title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sylvie Nègre et Odile Tourangin - Interior Design</title>
 
 	<!-- links include -->
 	<?php include 'link.html' ?>
@@ -11,15 +13,21 @@
 	<?php include 'js.html' ?>
 </head>
 <body>
-
-	<nav class="navbar navbar-default">
-		<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="div_logo">
+                <div id="container_logo">
+                    <a href="index.php">
+                        <img src="<?= IMG ?>logo_v2.png" id="logo" alt="logo site">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
 			<?php include 'nav.html' ?>
-		</div>
-	</nav>
 
-	<div class="container">
-		<?php include VIEWS . $this->view ?>
+			<?php include VIEWS . $this->view ?>
+		</div>
 	</div>
 
 	<footer class="footer">
