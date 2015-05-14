@@ -1,9 +1,9 @@
-<?php if($slider): ?>
+<?php if($images): ?>
     <div class="col-md-8">
         <ul class="bxslider">
-            <?php foreach($slider as $picture): ?>
+            <?php foreach($images as $image): ?>
                 <li>
-                    <img class="img-responsive" src="<?= IMG . 'gallery/' . $picture->slider_id . '/' . $picture->big ?>" alt=""/>
+                    <img class="img-responsive" src="<?= IMG . 'gallery/' . $image->slider_id . '/' . $image->big ?>" alt=""/>
                 </li>
             <?php endforeach ?>
         </ul>

@@ -32,7 +32,7 @@ class SliderController extends \Core\Controller
 	public function editAction()
 	{
 		try{
-			$slider = $this->model->getCurrent($this->getParam('id'));
+			$slider = $this->model->getOne(['id' => $this->getParam('id')]);
 		}catch(Exception $e){
 			echo $e->getMessage() . '<br/><a href="/admin">Retour</a>';
 			return false;

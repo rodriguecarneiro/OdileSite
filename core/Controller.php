@@ -46,7 +46,7 @@ class Controller
 	    	$app = new App();
 
 	    	$this->app = $app;
-	    	$this->me = $this->getModel('user')->getCurrent($_SESSION['user']['user_id']);
+	    	$this->me = $this->getModel('user')->getOne(['id' => $_SESSION['user']['user_id']]);
 			$this->isAdmin = $_SESSION['user']['admin'] ? true : false;
 
 	    	//notifications
@@ -252,6 +252,12 @@ class Controller
 				$this->redirect('/admin/auth');
 			};
 		}
+	}
+
+	public function notFound()
+	{
+		$app = new Application();
+		$app->error404();
 	}
 }
 

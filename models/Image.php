@@ -2,14 +2,12 @@
 
 namespace Models;
 
-use Models\Image;
-
 Class Image extends \Core\Crud
 {
     public static function deleteImg($sliderId, $imgId)
     {
         $image = new Image();
-        $pic = $image->getCurrent($imgId);
+        $pic = $image->getOne(['id' => $imgId]);
 
         //delete pics from site folder
         $dirPath = SITE_IMG . 'gallery' . DS . $sliderId . DS;
@@ -29,7 +27,7 @@ Class Image extends \Core\Crud
     public function setFrontStatus($imgId)
     {
         $image = new Image();
-        $pic = $image->getCurrent($imgId);
+        $pic = $image->getOne(['id' => $imgId]);
 
         $front = $pic->front ? 0 : 1;
 

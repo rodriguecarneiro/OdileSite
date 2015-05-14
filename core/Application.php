@@ -144,7 +144,7 @@ class Application
 	 * @return void
 	 */
 	public function error404() {
-		echo 'Oups ! Page not found...';
+		echo 'Oups ! Il semblerait que cette page n\'existe pas :( </br><a href="/">Retour au site</a>';
 		exit();
 	}
 }
