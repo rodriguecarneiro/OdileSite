@@ -2,7 +2,7 @@
 
 use \Models\Slider;
 
-class ProjectController extends \Core\Controller
+class HomeController extends \Core\Controller
 {
 	public function indexAction()
 	{

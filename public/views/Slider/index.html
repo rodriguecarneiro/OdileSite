@@ -1,0 +1,11 @@
+<?php if($images): ?>
+    <div class="col-md-8">
+        <ul class="bxslider">
+            <?php foreach($images as $image): ?>
+                <li>
+                    <img class="img-responsive" src="<?= IMG . 'gallery/' . $image->slider_id . '/' . $image->big ?>" alt=""/>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif ?>

@@ -28,6 +28,7 @@ class AuthController extends \Core\Controller
 	}
 
 	public function logoutAction() {
+
 		session_destroy();
 		$this->redirect('/');
 	}

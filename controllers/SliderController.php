@@ -3,14 +3,14 @@
 use Models\Image;
 use Models\Slider;
 
-class ProjectController extends \Core\Controller
+class SliderController extends \Core\Controller
 {
-	public function indexAction()
+	public function showAction()
 	{
-		if($this->getGET('page')){
-			
-			$slug = $this->getGET('page');
+		$slug = $this->getParam('slug');
 
+		$images = [];
+		if($slug !== null){
 	
 			$slider = (new Slider)->getOne([
 				'slug' => $slug
@@ -21,17 +21,12 @@ class ProjectController extends \Core\Controller
 			}
 
 			$images = (new Image)->select([
-				'where' => ['slider_id' => $slider->id]
-			]);
-
-		} else {
-			
-			$images = (new Image)->select([
-				'where' => ['front' => 1],
+				'where' => ['slider_id' => $slider->id],
 				'orderBy' => 'order'
 			]);
-		}
 
+		}
+		
 		$this->render('index', [
 			'images' => $images
 		]);

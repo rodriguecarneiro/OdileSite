@@ -21,7 +21,11 @@ class Application
 		->setViewsDir("../public/views/")
 		->setControllersDir("../controllers/");
 
-		$this->router = new Router($this->adminDir);
+		try{
+			$this->router = new Router($this->adminDir);
+		} catch (\Exception $e) {
+			$this->error404();
+		}
 	}
 	/**
 	 * Set the admin directory
@@ -106,7 +110,7 @@ class Application
 	 * Execute the request (It deserved it)
 	 */
 	public function run() {
-		
+
 		//set controller and view directory
 		if ($this->router->isAdmin) {
 			$requestedController = $this->getAdminControllersDir() . $this->router->getController() . '.php';
@@ -136,7 +140,6 @@ class Application
 		if (!method_exists($controller, $method)){ $this->error404(); }
 
 		//run method and set params
-
 		$controller->setParams($this->router->getParams())->$method();
 	}
 	/**

@@ -83,6 +83,11 @@ class Controller
 			$this->_params['id'] = (int) $params[0];
 		}
 
+		//set param slug for show view
+		if (isset($params[0]) && is_string($params[0])) {
+			$this->_params['slug'] = $params[0];
+		}
+
 		// set various param
 		if (isset($params[1]) && sizeof($params[1]) > 0) {
 			foreach ($params[1] as $various) {
